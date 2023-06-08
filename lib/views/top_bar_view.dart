@@ -38,6 +38,7 @@ String topBar({required User? user, required String? joey}) {
       sb.write(
           '<a href="/account/notifications"><i class="fa-solid fa-bell" style="color: red"></i></a>');
     }
+    sb.write('<a href="/account/logout">Log out</a>');
   }
   sb.write("</div>");
 
