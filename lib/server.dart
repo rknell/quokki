@@ -22,7 +22,7 @@ class Server {
 
     app.get('/status', (req, res) => res.json({'hello': 'world'}));
     app.get('/', (req, res) {
-      res.redirect(Uri.parse('/c/all'));
+      res.redirect(Uri.parse('/j/all'));
     });
     app.get('/j/create', JoeyRoute.createView,
         middleware: [Middleware.isAuthenticated]);

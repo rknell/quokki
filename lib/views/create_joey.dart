@@ -1,7 +1,7 @@
 String createJoeyView() => """
 <html>
 <head>
-    <title>Create a Subreddit</title>
+    <title>Create a Joey on Quokki</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
@@ -41,7 +41,8 @@ String createJoeyView() => """
 </head>
 <body>
     <div class="form-container">
-        <h2>Create a Subreddit</h2>
+        <h2>Create a Joey</h2>
+        <p>A joey is a baby quokka. Its also what we call "subreddits"</p>
         <form id="myForm">
             <div class="form-group">
                 <label for="displayName">Display Name</label>

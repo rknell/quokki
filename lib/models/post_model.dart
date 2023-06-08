@@ -24,7 +24,7 @@ class Post extends DbModel {
   /// Cached Calculated score / post age in minutes
   double rank;
 
-  String get commentsUrl => '/c/$joey/comments/${id.toHexString()}';
+  String get commentsUrl => '/j/$joey/comments/${id.toHexString()}';
   int commentCount;
 
   /// Convenience getter to help with rendering a number of areas
