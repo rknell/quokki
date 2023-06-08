@@ -84,7 +84,7 @@ class JoeyRoute {
     final post = Post.fromJson(body);
     post.upvotes.add(currentUser.username);
     await post.save();
-    return post.toJson();
+    return {"postId": post.id};
   }
 
   static Future createPostViewRoute(HttpRequest req, HttpResponse res) async {

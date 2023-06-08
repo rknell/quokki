@@ -20,14 +20,11 @@ String topBar({required User? user, required String? joey}) {
   if (user == null) {
     sb.write("<a href='/account/login'>Login | Signup</a>");
   }
-  if (joey != null) {
-    sb.write("<a href='/j/${joey}/comments'>Create Post</a>");
-  }
   if (user != null) {
     if (joey != null) {
       sb.write('<a href="/j/${joey}/create">Create Post</a>');
     }
-    sb.write("<a href='/j'>Create Community</a>");
+    sb.write("<a href='/j/create'>Create Community</a>");
   }
   if (user != null) {
     final unreadNotifications = user.unreadNotifications;
