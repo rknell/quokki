@@ -23,7 +23,7 @@ String postView(Post post, {User? user}) {
                 <div class="username"><a href="/u/${post.author}">submitted by: /u/${post.author}</a></div>
             </div> 
             <hr>
-            <div class="post-body">${markdownToHtml(post.body)}</div> 
+            ${post.body.isNotEmpty ? '<div class="post-body">${markdownToHtml(post.body)}</div>' : ""} 
           </div>
 
         </div>

@@ -37,6 +37,10 @@ String userNotificationsView(User user) {
             padding: 20px;
             border-radius: 5px;
         }
+        
+        .notification-read {
+            background-color: #f6f6f6;
+        }
 
         .notification:hover {
             background-color: #f6f6f6;
@@ -61,7 +65,8 @@ String userNotificationsView(User user) {
     </div>
 
     <div>
-        ${user.notifications.reversed.map((e) => commentItemView(e))}
+        ${(user.notifications.length == 0) ? "<p>No notifications</p>" : ""}
+        ${user.notifications.reversed.map((e) => commentItemView(e)).join('')}
     </div>
 </body>
 
@@ -72,8 +77,8 @@ String userNotificationsView(User user) {
 }
 
 String commentItemView(Notification notification) {
-  return """"
-          <div class="notification">
+  return """
+          <div class="notification ${notification.isRead ? 'notification-read' : 'notification-unread'}">
             <p><b>${notification.author}</b> replied:</p>
             <p>${markdownToHtml(notification.body)}</p>
             <a href="${notification.notificationUrl}">View context</a>

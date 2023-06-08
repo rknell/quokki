@@ -31,7 +31,7 @@ class Notification extends DbModel {
     if (commentId == null) {
       return "/j/$joeyId/comments/${postId.toHexString()}";
     } else {
-      return "/j/$joeyId/comments/${postId.toHexString()}/comment/${commentId}";
+      return "/j/$joeyId/comments/${postId.toHexString()}#${commentId?.toHexString()}";
     }
   }
 

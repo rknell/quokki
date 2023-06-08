@@ -63,7 +63,6 @@ class UserRoutes {
   }
 
   /// Get another users details
-
   static Future<Map<String, dynamic>> getUser(
       HttpRequest req, HttpResponse res) async {
     final username = req.params['username'];

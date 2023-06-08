@@ -29,9 +29,9 @@ class User extends DbModel {
     required this.username,
     required this.password,
     required this.email,
-    List<Notification>? messages,
+    List<Notification>? notifications,
     super.id,
-  }) : notifications = messages ?? <Notification>[];
+  }) : notifications = notifications ?? <Notification>[];
 
   String get jwt {
     /// Generate a JWT token
@@ -57,7 +57,11 @@ class User extends DbModel {
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  Map<String, dynamic> toJsonSanitized() => toJson()..remove('password');
+  Map<String, dynamic> toJsonSanitized() => toJson()
+    ..remove('password')
+    ..remove('notifications')
+    ..remove('email')
+    ..remove('_id');
 
   User fromJson(Map<String, dynamic> json) => User.fromJson(json);
 
