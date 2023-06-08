@@ -1,3 +1,5 @@
+import 'package:markdown/markdown.dart';
+
 import '../models/comments_model.dart';
 import '../models/post_model.dart';
 import '../models/user_model.dart';
@@ -91,7 +93,7 @@ String postView(Post post, {User? user}) {
                 <div class="username"><a href="/u/${post.author}">submitted by: /u/${post.author}</a></div>
             </div> 
             <hr>
-            <div class="post-body">${post.body}</div> 
+            <div class="post-body">${markdownToHtml(post.body)}</div> 
           </div>
 
         </div>
@@ -272,7 +274,7 @@ String renderComments(List<Comment> comments, User? user) {
           </div>
           <div class='comment-content'>
             <div class="username"><a href="#">/u/${comment.author}</a></div>
-            <div class="comment-text">${comment.body}</div>
+            <div class="comment-text">${markdownToHtml(comment.body)}</div>
             ${(user != null) ? "<a href='#' class='reply-link'>reply</a>" : ""}
             <div class="nested">
                 ${renderComments(comment.comments, user)}

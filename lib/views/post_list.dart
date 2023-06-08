@@ -151,7 +151,7 @@ String postListItemView(Post post) {
             ${post.isCommentPost == false ? '(${Uri.parse(post.url!).host})' : ''}
           </div>
           <div class="reddit-post-details">submitted ${CalendarTime(post.timestamp).toHuman} by ${post.author} to <a href='/j/${post.joey}'>/j/${post.joey}</a> </div>
-          <div class="reddit-post-content">${post.body}</div>
+          <div class="reddit-post-content">${truncateWithEllipsis(200, post.body)}</div>
           <div class="reddit-post-details"><a href="/j/${post.joey}/comments/${post.id.toHexString()}">${post.commentCount} comments</a> share save hide report</div>
         </div>
     </div>
@@ -175,4 +175,10 @@ String topBar(User? user, Joey joey) {
     </div>
     """;
   }
+}
+
+String truncateWithEllipsis(int cutoff, String myString) {
+  return (myString.length <= cutoff)
+      ? myString
+      : '${myString.substring(0, cutoff)}...';
 }

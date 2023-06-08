@@ -82,7 +82,8 @@ class JoeyRoute {
     body['joey'] = joeyName;
     body['author'] = currentUser.username;
     final post = Post.fromJson(body);
-    await db.posts.insertOne(post.toJson());
+    post.upvotes.add(currentUser.username);
+    await post.save();
     return post.toJson();
   }
 
