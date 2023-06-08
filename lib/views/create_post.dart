@@ -50,8 +50,8 @@ String createPostView({String joey = ''}) {
             </div>
              
             <div class="form-group">
-                <label for="cent">Cent</label>
-                <input type="text" id="cent" name="cent" value="$joey">
+                <label for="joey">Joey</label>
+                <input type="text" id="joey" name="joey" value="$joey">
             </div>
             <div class="form-group">
                 <label for="url">URL</label>
@@ -67,7 +67,7 @@ String createPostView({String joey = ''}) {
                 \$("#myForm").on('submit', function(e) {
                     e.preventDefault();
     
-                    var url = "/j/" + \$("#cent").val();
+                    var url = "/j/" + \$("#joey").val();
                     
                     \$.ajax({
                         type: "POST",

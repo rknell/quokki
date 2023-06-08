@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:alfred/alfred.dart';
 import 'package:quokki/middleware.dart';
 import 'package:quokki/routes/admin.dart';
-import 'package:quokki/routes/cents.dart';
+import 'package:quokki/routes/joeys.dart';
 import 'package:quokki/routes/posts.dart';
 import 'package:quokki/routes/users.dart';
 

@@ -11,7 +11,7 @@ class Joey extends DbModel {
   String idName;
   String description;
 
-  /// Represents a userId that can moderate the cent
+  /// Represents a userId that can moderate the joey
   final Set<String> mods;
   Joey(
       {required this.displayName,
