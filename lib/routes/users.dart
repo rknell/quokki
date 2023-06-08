@@ -4,6 +4,7 @@ import 'package:alfred/alfred.dart';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:quokki/services/database.dart';
 import 'package:quokki/views/registration.dart';
+import 'package:quokki/views/user_notifications_view.dart';
 
 import '../models/user_model.dart';
 
@@ -82,5 +83,17 @@ class UserRoutes {
     } else {
       res.redirect(Uri.parse('/'));
     }
+  }
+
+  static Future notificationsView(HttpRequest req, HttpResponse res) async {
+    final currentUser = await User.getCurrentUser(req);
+    if (currentUser == null) {
+      throw AlfredException(401, {'message': 'Not logged in'});
+    }
+    final html = userNotificationsView(currentUser);
+    res.headers.contentType = ContentType.html;
+    await currentUser.markNotificationsRead();
+    print('notificationsView');
+    return html;
   }
 }

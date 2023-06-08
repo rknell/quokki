@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:alfred/alfred.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:quokki/models/notification_model.dart';
 
 import '../models/comments_model.dart';
 import '../models/post_model.dart';
@@ -105,6 +106,21 @@ class PostsRoutes {
     }
     postObj.commentCount++;
     await postObj.save();
+
+    final notificationUser =
+        await db.users.findOne({'username': postObj.author});
+    if (notificationUser != null) {
+      final notificationUserObj = User.fromJson(notificationUser);
+
+      notificationUserObj.notifications.add(Notification(
+          postId: postObj.id,
+          joeyId: postObj.joey,
+          commentId: comment.id,
+          author: currentUser.username,
+          body: comment.body));
+      await notificationUserObj.save();
+    }
+
     return comment.toJson();
   }
 

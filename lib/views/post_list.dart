@@ -1,5 +1,6 @@
 import 'package:calendar_time/calendar_time.dart';
 import 'package:quokki/models/joey_model.dart';
+import 'package:quokki/views/top_bar_view.dart';
 
 import '../models/post_model.dart';
 import '../models/user_model.dart';
@@ -81,7 +82,7 @@ String postListView(Joey joey, List<Post> posts, {User? user}) {
     </head>
     <body>
     <div>
-      ${topBar(user, joey)}
+      ${topBar(user: user, joey: joey.idName)}
     </div>
     <div class='header'>
       <h1>${joey.displayName}</h1>
@@ -158,24 +159,25 @@ String postListItemView(Post post) {
   """;
 }
 
-String topBar(User? user, Joey joey) {
-  if (user == null) {
-    return """
-    <div class="top-bar">
-      <a href="/account/login">Login | Signup</a>
-    </div>
-    """;
-  } else {
-    return """
-    <div class="top-bar">
-      <a href='/'>Front Page</a>
-      <a href="/j/${joey.idName}/create">Create Post</a>
-      <a href="/j/create">Create Community</a>
-      <a href="/account/logout">Logout</a>
-    </div>
-    """;
-  }
-}
+// String topBar(User? user, Joey joey) {
+//   if (user == null) {
+//     return """
+//     <div class="top-bar">
+//       <a href="/account/login">Login | Signup</a>
+//     </div>
+//     """;
+//   } else {
+//     return """
+//     <div class="top-bar">
+//       <a href='/'>Front Page</a>
+//       <a href="/j/${joey.idName}/create">Create Post</a>
+//       <a href="/j/create">Create Community</a>
+//       <a href="/account/logout">Logout</a>
+//       ${renderNotificationBell(user)}
+//     </div>
+//     """;
+//   }
+// }
 
 String truncateWithEllipsis(int cutoff, String myString) {
   return (myString.length <= cutoff)

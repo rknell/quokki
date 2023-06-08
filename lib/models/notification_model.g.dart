@@ -7,16 +7,22 @@ part of 'notification_model.dart';
 // **************************************************************************
 
 Notification _$NotificationFromJson(Map<String, dynamic> json) => Notification(
-      postId: json['postId'] as String,
-      isRead: json['isRead'] as bool,
-      commentId: json['commentId'] as String?,
+      postId: JSONHelpers.fromJsonObjectId(json['postId']),
+      isRead: json['isRead'] as bool? ?? false,
+      commentId: JSONHelpers.fromJsonObjectIdNullable(json['commentId']),
+      joeyId: json['joeyId'] as String,
+      body: json['body'] as String,
+      author: json['author'] as String,
       id: JSONHelpers.fromJsonObjectId(json['_id']),
     );
 
 Map<String, dynamic> _$NotificationToJson(Notification instance) =>
     <String, dynamic>{
       '_id': JSONHelpers.toJsonObjectId(instance.id),
-      'postId': instance.postId,
-      'commentId': instance.commentId,
+      'joeyId': instance.joeyId,
+      'postId': JSONHelpers.toJsonObjectId(instance.postId),
+      'commentId': JSONHelpers.toJsonObjectIdNullable(instance.commentId),
       'isRead': instance.isRead,
+      'body': instance.body,
+      'author': instance.author,
     };

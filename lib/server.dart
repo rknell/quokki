@@ -68,6 +68,9 @@ class Server {
     app.get('/account/current', UserRoutes.getCurrentUser,
         middleware: [Middleware.isAuthenticated]);
 
+    app.get('/account/notifications', UserRoutes.notificationsView,
+        middleware: [Middleware.isAuthenticated]);
+
     /// Admin routes. Probably need to project these from spam or use some internal
     /// strategy to kick them off.
     app.get('/admin/rankPosts', AdminRoute.rankPosts,

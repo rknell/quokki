@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:alfred/alfred.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
-import 'package:quokki/models/notification_model.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:quokki/models/notification_model.dart';
 
 import '../services/database.dart';
 import 'db_model.dart';
@@ -22,6 +22,8 @@ class User extends DbModel {
 
   /// Represents a postId the user has a notification for
   final List<Notification> notifications;
+  List<Notification> get unreadNotifications =>
+      notifications.where((element) => element.isRead == false).toList();
 
   User({
     required this.username,
@@ -58,4 +60,15 @@ class User extends DbModel {
   Map<String, dynamic> toJsonSanitized() => toJson()..remove('password');
 
   User fromJson(Map<String, dynamic> json) => User.fromJson(json);
+
+  Future<void> save() {
+    return db.users.update({"_id": id}, {"\$set": toJson()});
+  }
+
+  Future markNotificationsRead() {
+    for (final notification in notifications) {
+      notification.isRead = true;
+    }
+    return save();
+  }
 }

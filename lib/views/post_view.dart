@@ -1,85 +1,15 @@
 import 'package:markdown/markdown.dart';
+import 'package:quokki/views/template.dart';
+import 'package:quokki/views/top_bar_view.dart';
 
 import '../models/comments_model.dart';
 import '../models/post_model.dart';
 import '../models/user_model.dart';
 
 String postView(Post post, {User? user}) {
-  return """
-<html>
-<head>
-    <title>${post.title}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/fontawesome.min.js"></script>
-    <link rel='stylesheet' href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin-top: 0;
-        }
-        .top-bar {
-          background-color: black;
-          padding: 5px;
-          margin-bottom: 10px;
-        }
-        .post-title {
-            font-size: 1.5em;
-            color: #5f99cf;
-        }
-        .post-header {
-          display: flex
-        }
-        .post-body {
-          padding: 20px;background: lightgray;
-        }
-        .username {
-            color: #888;
-        }
-        .username a {
-            color: #888;
-        }
-        .upvotes {
-            color: #888;
-        }
-        .comment-text {
-            margin-bottom: 10px;
-        }
-        .nested {
-            margin-left: 20px;
-        }
-        .toggle {
-            color: #888;
-            cursor: pointer;
-        }
-        .vote-buttons {
-            margin-right: 10px;
-        }
-
-        .vote-buttons i {
-            display: block;
-            width: 20px;
-            cursor: pointer;
-        }
-
-        .vote-count {
-            text-align: center;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        
-        .comment {
-          display: flex;
-        }
-    </style>
-</head>
-<body>
-<div class='top-bar'>
-  <a href='/'>Front Page </a>
-  <a href='/j/${post.joey}'>/j/${post.joey}</a>
-  ${renderAccountButtons(post: post, user: user)}
-</div>
-    <div class="container">
+  return template(title: post.title, body: """
+  ${topBar(user: user, joey: post.joey)}
+    <div class="container" style="margin-top: 10px">
         <div class='post-header'>
           <div class="vote-buttons">
               <i class="fa-solid fa-circle-up upvote-button"></i>
@@ -254,9 +184,7 @@ String postView(Post post, {User? user}) {
             });
         });
     </script>
-</body>
-</html>
-  """;
+  """);
 }
 
 /// Recurisvely render comments on the post, indenting each level of comments
