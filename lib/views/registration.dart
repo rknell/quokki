@@ -25,6 +25,7 @@ String registationView() {
                 <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
+            <div id="loginError" style="color: red; font-weight: bold; margin-top: 10px;"></div>
             <div class="text-center">
                 <a href="#" id="signupLink">Don't have an account? Signup</a>
             </div>
@@ -60,20 +61,23 @@ String registationView() {
         });
 
         \$("#loginForm").submit(function(e) {
-            e.preventDefault();
-            var username = \$("#loginUsername").val();
-            var password = \$("#loginPassword").val();
+    e.preventDefault();
+    var username = \$("#loginUsername").val();
+    var password = \$("#loginPassword").val();
 
-            \$.ajax({
-                type: "POST",
-                url: "/account/login",
-                data: JSON.stringify({username: username, password: password}),
-                contentType: "application/json; charset=utf-8",
-                success: function() {
-                    window.location.href = "/";
-                }
-            });
-        });
+    \$.ajax({
+        type: "POST",
+        url: "/account/login",
+        data: JSON.stringify({username: username, password: password}),
+        contentType: "application/json; charset=utf-8",
+        success: function() {
+            window.location.href = "/";
+        },
+        error: function(xhr, status, error) {
+            \$("#loginError").text("Login failed: " + error);
+        }
+    });
+});
 
         \$("#signupForm").submit(function(e) {
             e.preventDefault();
